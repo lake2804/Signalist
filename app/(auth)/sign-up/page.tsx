@@ -10,9 +10,12 @@ import {
   RISK_TOLERANCE_OPTIONS,
 } from "@/lib/constants";
 import FooterLink from "@/components/forms/FooterLink";
+import {signUpWithEmail} from "@/lib/actions/auth.actions";
+import {useRouter} from "next/navigation";
 
 const SignUp = () => {
-  const {
+    const router = useRouter();
+    const {
     register,
     handleSubmit,
     control,
@@ -32,9 +35,12 @@ const SignUp = () => {
 
   const onSubmit = async (data: SignUpFormData) => {
     try {
-      console.log(data);
+      const result = await signUpWithEmail(data);
+      if(result.success) router.push('/')
     } catch (e) {
-      console.log(e);
+      toast.error('Sign up failed', {
+          description: e instanceof Error ? e.message : 'Failed to create an account'
+      })
     }
   };
 
