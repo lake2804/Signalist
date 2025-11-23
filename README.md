@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Signalist - Stock Market Application
 
-## Getting Started
+Signalist is a modern stock market tracking and analysis application built with Next.js, React, and MongoDB. It provides real-time stock data, watchlist functionality, and personalized stock alerts.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Check out the live demo: [Signalist on Vercel](https://signalist-5b4pbxriw-lakesayhis-projects.vercel.app) (Latest Production)
+
+## ✨ Features
+
+- 📈 Real-time stock data visualization
+- ⭐ Personalized watchlists
+- 🔔 Stock price alerts
+- 📱 Responsive design for all devices
+- 🌓 Light/Dark mode support
+- 🔐 User authentication
+- 📧 Email notifications
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS, Radix UI
+- **State Management**: React Hook Form
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB with Mongoose
+- **Authentication**: Custom auth solution with JWT
+- **Deployment**: Vercel
+- **UI Components**: Radix UI, Lucide Icons
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18.0.0 or later
+- MongoDB Atlas account or local MongoDB instance
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/lake2804/Signalist.git
+   cd Signalist
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Create a `.env.local` file in the root directory and add the following environment variables:
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXTAUTH_URL=http://localhost:3000
+   FINNHUB_API_KEY=your_finnhub_api_key
+   EMAIL_SERVER=your_email_server_details
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## 📂 Project Structure
+
+```
+.
+├── app/                    # App router
+│   ├── (root)/            # Main application routes
+│   ├── api/               # API routes
+│   └── auth/              # Authentication pages
+├── components/            # Reusable components
+├── lib/                   # Utility functions
+├── database/              # Database models and connections
+├── public/                # Static files
+└── styles/                # Global styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file in the root directory with the following variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `MONGODB_URI`: MongoDB connection string
+- `NEXTAUTH_SECRET`: Secret key for NextAuth.js
+- `NEXTAUTH_URL`: Base URL of your application
+- `FINNHUB_API_KEY`: API key for Finnhub.io
+- `EMAIL_SERVER`: Email server configuration
 
-## Learn More
+## 🚀 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+The application is deployed on Vercel. To deploy your own instance:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Fork this repository
+2. Connect to Vercel
+3. Add environment variables in Vercel project settings
+4. Deploy!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📝 License
 
-## Deploy on Vercel
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🙏 Acknowledgments
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js](https://nextjs.org/) for the amazing React framework
+- [MongoDB](https://www.mongodb.com/) for the database
+- [Finnhub](https://finnhub.io/) for stock market data
+- [Vercel](https://vercel.com/) for deployment
