@@ -22,6 +22,65 @@ async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T>
 
 export { fetchJSON };
 
+export async function getQuote(symbol: string): Promise<QuoteData> {
+  const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
+  if (!token) {
+    throw new Error('FINNHUB API key is not configured');
+  }
+  const url = `${FINNHUB_BASE_URL}/quote?symbol=${encodeURIComponent(symbol)}&token=${token}`;
+  return fetchJSON<QuoteData>(url, 60);
+}
+
+export async function getProfile(symbol: string): Promise<ProfileData> {
+  const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
+  if (!token) {
+    throw new Error('FINNHUB API key is not configured');
+  }
+  const url = `${FINNHUB_BASE_URL}/stock/profile2?symbol=${encodeURIComponent(symbol)}&token=${token}`;
+  return fetchJSON<ProfileData>(url, 3600);
+}
+
+export async function getFinancials(symbol: string): Promise<FinancialsData> {
+  const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
+  if (!token) {
+    throw new Error('FINNHUB API key is not configured');
+  }
+  const url = `${FINNHUB_BASE_URL}/stock/metric?symbol=${encodeURIComponent(symbol)}&metric=all&token=${token}`;
+  return fetchJSON<FinancialsData>(url, 3600);
+}
+
+export async function getStockOverview(symbol: string): Promise<{
+  currentPrice?: number;
+  changePercent?: number;
+  marketCapUsd?: number;
+  peRatio?: number;
+}> {
+  const upper = symbol.toUpperCase();
+
+  const [quote, profile, financials] = await Promise.allSettled([
+    getQuote(upper),
+    getProfile(upper),
+    getFinancials(upper),
+  ]);
+
+  const currentPrice =
+    quote.status === 'fulfilled' ? quote.value.c ?? undefined : undefined;
+  const changePercent =
+    quote.status === 'fulfilled' ? quote.value.dp ?? undefined : undefined;
+
+  const marketCapUsd =
+    profile.status === 'fulfilled'
+      ? profile.value.marketCapitalization
+      : undefined;
+
+  const peRatio =
+    financials.status === 'fulfilled'
+      ? financials.value.metric?.peTTM ?? financials.value.metric?.peBasicExclExtraTTM
+      : undefined;
+
+  return { currentPrice, changePercent, marketCapUsd, peRatio };
+}
+
 export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> {
   try {
     const range = getDateRange(5);

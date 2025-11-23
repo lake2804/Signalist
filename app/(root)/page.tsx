@@ -5,10 +5,26 @@ import {
     MARKET_OVERVIEW_WIDGET_CONFIG,
     TOP_STORIES_WIDGET_CONFIG
 } from "@/lib/constants";
-import {sendDailyNewsSummary} from "@/lib/inngest/functions";
+import NewsSummaryPreviewTrigger from "@/components/NewsSummaryPreviewTrigger";
+import { auth } from "@/lib/better-auth/auth";
+import { headers } from "next/headers";
+import { generateNewsSummaryEmailHtmlForUser } from "@/lib/actions/news-summary-preview.actions";
 
-const Home = () => {
+const Home = async () => {
     const scriptUrl = `https://s3.tradingview.com/external-embedding/embed-widget-`;
+
+    let newsSummaryHtml: string | undefined;
+
+    try {
+        const session = await auth.api.getSession({ headers: await headers() });
+
+        if (session?.user?.email) {
+            const { html } = await generateNewsSummaryEmailHtmlForUser(session.user.email);
+            newsSummaryHtml = html;
+        }
+    } catch (error) {
+        console.error("Failed to load news summary preview", error);
+    }
 
     return (
         <div className="flex min-h-screen home-wrapper">
@@ -47,6 +63,7 @@ const Home = () => {
                     />
                 </div>
             </section>
+            <NewsSummaryPreviewTrigger html={newsSummaryHtml} />
         </div>
     )
 }

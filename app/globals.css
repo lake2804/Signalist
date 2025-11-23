@@ -250,6 +250,9 @@
   .nav-list {
     @apply flex flex-col sm:flex-row p-2 gap-3 sm:gap-10 font-medium;
   }
+  .summary-floating-btn {
+    @apply fixed top-4 right-4 z-50 inline-flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800/90 px-3 py-1.5 text-xs md:text-sm font-medium text-gray-100 shadow-lg backdrop-blur-md hover:border-yellow-400 hover:text-yellow-400 transition-colors;
+  }
   .stock-details-container {
     @apply w-full grid-cols-1 gap-6 xl:grid-cols-3 space-y-6 sm:space-y-8;
   }
@@ -257,7 +260,7 @@
     @apply bg-yellow-500 text-base hover:bg-yellow-500 text-gray-900 w-full rounded h-11 font-semibold cursor-pointer;
   }
   .watchlist-remove {
-    @apply bg-red-500! hover:bg-red-500! text-gray-900!
+    @apply !bg-red-500 hover:!bg-red-500 !text-gray-900;
   }
   .watchlist-empty-container {
     @apply container gap-8 flex-col items-center md:mt-10 p-6 text-center;

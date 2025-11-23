@@ -257,7 +257,7 @@ export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
     isTransparent: 'true',
     locale: 'en',
     width: '100%',
-    height: 464,
+    height: 960,
     displayMode: 'regular',
     largeChartUrl: '',
 });
@@ -265,12 +265,12 @@ export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
 export const POPULAR_STOCK_SYMBOLS = [
     // Tech Giants (the big technology companies)
     'AAPL',
+    'NVDA',
     'MSFT',
     'GOOGL',
     'AMZN',
     'TSLA',
     'META',
-    'NVDA',
     'NFLX',
     'ORCL',
     'CRM',
